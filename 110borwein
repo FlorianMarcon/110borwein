@@ -1,0 +1,64 @@
+#! /usr/bin/env python3
+
+import sys
+
+from borwein import Borwein
+from math import pi
+
+
+def rectangle_method(borwein, pas):
+	x = 0
+	res = 0
+	while x < 5000:
+		area = borwein.compute(x) * pas
+		res = res + area
+		x = x + pas
+	return (res)
+
+def trapezoide_method(borwein, pas):
+	x = 0
+	res = 0
+	while x < 5000:
+		area = (pas) * (borwein.compute(x) + borwein.compute(x + pas)) / 2
+		res = res + area
+		x = x + pas
+	return (res)
+
+def simpson_method(borwein, pas):
+	x = 0
+	res = 0
+	while x < 5000:
+		var = borwein.compute(x) + 4 * borwein.compute((2 * x + pas) / 2) + borwein.compute(x + pas)
+		var = var * ((pas) / 6)
+		res = res + var
+		x = x + pas
+	return (res)
+
+def display(borwein, rect, trap, simps):
+	print("Rectangles:")
+	print("I%i = %.10f" % (borwein.n, rect))
+	print("diff = %.10f" % (rect - (pi / 2)))
+	print()
+	print("Trapezoids:")
+	print("I%i = %.10f" % (borwein.n, trap))
+	print("diff = %.10f" % (trap - (pi / 2)))
+	print()
+	print("Simpson:")
+	print("I%i = %.10f" % (borwein.n, simps))
+	print("diff = %.10f" % (simps - (pi / 2)))
+
+if __name__ == '__main__':
+	maximum = 5000;
+	pas = maximum / 10000
+	try:
+		assert(len(sys.argv) == 2)
+		float(sys.argv[1])
+		assert(float(sys.argv[1]) >= 0)
+	except:
+		print("retry with -h")
+		sys.exit(84)
+	borwein = Borwein(float(sys.argv[1]))
+	rect = rectangle_method(borwein, pas)
+	trap = trapezoide_method(borwein, pas)
+	simps = simpson_method(borwein, pas)
+	display(borwein, rect, trap, simps)
