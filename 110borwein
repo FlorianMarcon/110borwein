@@ -36,15 +36,15 @@ def simpson_method(borwein, pas):
 
 def display(borwein, rect, trap, simps):
 	print("Rectangles:")
-	print("I%i = %.10f" % (borwein.n, rect))
+	print("I%i = %.10f" % (abs(borwein.n), rect))
 	print("diff = %.10f" % (rect - (pi / 2)))
 	print()
 	print("Trapezoids:")
-	print("I%i = %.10f" % (borwein.n, trap))
+	print("I%i = %.10f" % (abs(borwein.n), trap))
 	print("diff = %.10f" % (trap - (pi / 2)))
 	print()
 	print("Simpson:")
-	print("I%i = %.10f" % (borwein.n, simps))
+	print("I%i = %.10f" % (abs(borwein.n), simps))
 	print("diff = %.10f" % (simps - (pi / 2)))
 
 if __name__ == '__main__':
@@ -52,8 +52,8 @@ if __name__ == '__main__':
 	pas = maximum / 10000
 	try:
 		assert(len(sys.argv) == 2)
-		float(sys.argv[1])
-		assert(float(sys.argv[1]) >= 0)
+		int(sys.argv[1])
+		assert(int(sys.argv[1]) >= 0)
 	except:
 		print("retry with -h")
 		sys.exit(84)
