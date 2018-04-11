@@ -36,7 +36,7 @@ def simpson_method(borwein, pas):
 
 def display(borwein, rect, trap, simps):
 	diff = (rect - (pi / 2))
-	if round(diff, 10) == 0:
+	if diff < 0.00000000001 and diff > -0.00000000001:
 		diff = 0
 	print("Rectangles:")
 	print("I%i = %.10f" % (abs(borwein.n), rect))
@@ -45,14 +45,14 @@ def display(borwein, rect, trap, simps):
 	print("Trapezoids:")
 	print("I%i = %.10f" % (abs(borwein.n), trap))
 	diff = (trap - (pi / 2))
-	if round(diff, 10) == 0:
+	if diff < 0.00000000001 and diff > -0.00000000001:
 		diff = 0
 	print("diff = %.10f" % diff)
 	print()
 	print("Simpson:")
 	print("I%i = %.10f" % (abs(borwein.n), simps))
 	diff = (simps - (pi / 2))
-	if round(diff, 10) == 0:
+	if diff < 0.00000000001 and diff > -0.00000000001:
 		diff = 0
 	print("diff = %.10f" % diff)
 
